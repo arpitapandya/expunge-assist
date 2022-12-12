@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Theme, makeStyles, createStyles } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 interface ComponentProps {
   className?: string;
   theme?: string;
-  hasArrow?: boolean;
+  hasBackArrow?: boolean;
+  hasForwardArrow?: boolean;
   disabled?: boolean;
   icon?: React.ReactNode;
   buttonText?: string;
@@ -15,7 +17,8 @@ interface ComponentProps {
 
 interface StyleProps {
   theme?: string;
-  hasArrow?: boolean;
+  hasForwardArrow?: boolean;
+  hasBackArrow?: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>(({ palette }) =>
@@ -134,13 +137,14 @@ const useStyles = makeStyles<Theme, StyleProps>(({ palette }) =>
 const ButtonComponent = ({
   className = '',
   theme,
-  hasArrow,
+  hasBackArrow,
+  hasForwardArrow,
   disabled = false,
   icon,
   buttonText,
   onClick,
 }: ComponentProps) => {
-  const styleProps = { theme, hasArrow };
+  const styleProps = { theme, hasBackArrow, hasForwardArrow };
   const classes = useStyles(styleProps);
   return (
     <Button
@@ -151,7 +155,8 @@ const ButtonComponent = ({
     >
       {icon}
       {buttonText}
-      {hasArrow && <ArrowForwardIcon style={{ height: '.8em' }} />}
+      {hasForwardArrow && <ArrowForwardIcon style={{ height: '.8em' }} />}
+      {hasBackArrow && <ArrowBackIcon />}
     </Button>
   );
 };
